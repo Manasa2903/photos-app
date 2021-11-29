@@ -14,8 +14,9 @@ const Photos = () => {
         fetch(`https://jsonplaceholder.typicode.com/albums/${page}/photos`)
         .then(response => response.json())
         .then(jsonData => {
-            setAlbumsData(jsonData)
             setLoading(false)
+            setAlbumsData(jsonData)
+            
         })
         .catch(e => {
             console.log(e.message)
@@ -24,66 +25,61 @@ const Photos = () => {
     }, [page])
     return ( 
         <>
-        <Pagination>
-                <PaginationItem>
-                    <PaginationLink
-                    first
-                    href="#"
-                    onClick = {() => setPage(1)}
-                    />
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationLink
-                    href="#"
-                    previous
-                    onClick = {() => page > 1 ? setPage(page-1) : setPage(1)}
-                    />
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationLink href="#" onClick={() => setPage(1)}>{page}</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationLink href="#" onClick={() => setPage(page + 1)}>{page + 1}</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationLink href="#" onClick={() => setPage(page + 2)}>{page + 2}</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationLink href="#" onClick={() => setPage(page + 3)}>{page + 3}</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationLink href="#" onClick={() => setPage(page + 4)}>{page + 4}</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationLink
-                    href="#"
-                    next
-                    onClick = {() => page < 100 && setPage(page+1)}
-                    />
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationLink
-                    href="#"
-                    last
-                    onClick = {() => setPage(100)}
-                    />
-                </PaginationItem>
-                
-            </Pagination>
-            <Container fluid>
+        <div className="pagination">
+            <Pagination>
+                    <PaginationItem>
+                        <PaginationLink
+                        first
+                        onClick = {() => setPage(1)}
+                        />
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationLink
+                        previous
+                        onClick = {() => page > 1 ? setPage(page-1) : setPage(1)}
+                        />
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationLink onClick={() => setPage(1)}>1</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationLink onClick={() => setPage(2)}>2</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationLink onClick={() => setPage(3)}>3</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationLink
+                        next
+                        onClick = {() => page < 100 && setPage(page+1)}
+                        />
+                    </PaginationItem>
+                    <PaginationItem>
+                        <PaginationLink
+                        last
+                        onClick = {() => setPage(100)}
+                        />
+                    </PaginationItem>
+                    
+                </Pagination>
+            </div>
+
+            <Container>
                 <Row>
             
-        {
-            loading? <Spinner
-            color="success"
-            type="grow"
-          >
-            Loading...
-          </Spinner> :
-          
-            albumsData.map(eachAlbum => <Photo key = {eachAlbum.id} albumData = {eachAlbum}/>)
-        }
-        </Row>
+                    {
+                        loading? 
+                        <div className="spinner">
+                            <Spinner
+                                color="success"
+                                type="grow"
+                            >
+                        
+                                Loading...
+                            </Spinner> 
+                        </div> : albumsData.map(eachAlbum => <Photo key = {eachAlbum.id} albumData = {eachAlbum}/>)
+                    }
+                </Row>
         </Container>
         </>
      );

@@ -1,3 +1,14 @@
-.thumbnail-image {
-    height: 150px;
+.spinner {
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cards {
+    margin-bottom: 15px;
+}
+
+.pagination {
+    text-align: center;
 }
