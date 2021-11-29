@@ -6,7 +6,7 @@ const Photo = ({albumData}) => {
 
     return (
             <>
-                <Col xs="12" sm="6" lg="3" xl="2">
+             <Col xs="12" sm="6" lg="3" xl="2">
                     <Card className="cards">
                     <CardImg
                             alt="Card image cap"
@@ -22,7 +22,7 @@ const Photo = ({albumData}) => {
                             </CardBody>
                     </Card>
                 </Col>
-         </> 
+            </> 
     );
 }
  

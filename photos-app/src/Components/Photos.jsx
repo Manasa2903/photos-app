@@ -37,7 +37,7 @@ const Photos = () => {
                     <PaginationItem>
                         <PaginationLink
                         previous
-                        onClick = {() => page > 1 ? setPage(page-1) : setPage(1)}
+                        onClick = {() => page > 1 && setPage(page-1)}
                         />
                     </PaginationItem>
                     <PaginationItem>
@@ -73,7 +73,6 @@ const Photos = () => {
                         <div className="spinner">
                             <Spinner
                                 color="success"
-                                type="grow"
                             >
                         
                                 Loading...
