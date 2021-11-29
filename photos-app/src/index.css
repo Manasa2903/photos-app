@@ -10,5 +10,15 @@
 }
 
 .pagination {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.heading {
+    margin-top: 15px;
+    color: rgb(87, 87, 236);
+    font-size: 35px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }

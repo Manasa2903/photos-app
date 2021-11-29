@@ -25,6 +25,7 @@ const Photos = () => {
     }, [page])
     return ( 
         <>
+        <h1 className="heading">Photos App</h1>
         <div className="pagination">
             <Pagination>
                     <PaginationItem>

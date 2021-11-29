@@ -5,10 +5,9 @@ const Photo = ({albumData}) => {
     const {thumbnailUrl, title} = albumData
 
     return (
-        <>
-            
+            <>
                 <Col xs="12" sm="6" lg="3" xl="2">
-                    <Card>
+                    <Card className="cards">
                     <CardImg
                             alt="Card image cap"
                             src={thumbnailUrl}
@@ -23,9 +22,7 @@ const Photo = ({albumData}) => {
                             </CardBody>
                     </Card>
                 </Col>
-
-            
-        </> 
+         </> 
     );
 }
  
