@@ -9,11 +9,14 @@ import {
   Row,
   Spinner,
 } from "reactstrap";
+import ImagePreview from "./ImagePreview";
 
 const Photos = () => {
   const [page, setPage] = useState(1);
   const [albumsData, setAlbumsData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [open, setOpen] = useState(false);
+  const [imagePreviewDetails, setImagePreviewDetails] = useState(null);
 
   useEffect(() => {
     setLoading(true);
@@ -28,8 +31,26 @@ const Photos = () => {
         setLoading(false);
       });
   }, [page]);
+
+  const showImagePreview = (previewDetails) => {
+    setOpen(true);
+    setImagePreviewDetails(previewDetails);
+  };
+
+  const hideImagePreview = () => {
+    setOpen(false);
+    setImagePreviewDetails(null);
+  };
+
   return (
     <>
+      {open && (
+        <ImagePreview
+          title={imagePreviewDetails.title}
+          url={imagePreviewDetails.url}
+          hidePreview={hideImagePreview}
+        />
+      )}
       <h1 className="heading">Photos App</h1>
       <div className="pagination">
         <Pagination>
@@ -103,7 +124,11 @@ const Photos = () => {
             </div>
           ) : (
             albumsData.map((eachAlbum) => (
-              <Photo key={eachAlbum.id} albumData={eachAlbum} />
+              <Photo
+                key={eachAlbum.id}
+                albumData={eachAlbum}
+                showPreview={showImagePreview}
+              />
             ))
           )}
         </Row>

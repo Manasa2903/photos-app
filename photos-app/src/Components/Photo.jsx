@@ -1,14 +1,7 @@
 import { Card, CardBody, CardImg, CardTitle, Col } from "reactstrap";
-import ImagePreview from "./ImagePreview";
-import { useState } from "react";
 
-const Photo = ({ albumData }) => {
+const Photo = ({ albumData, showPreview }) => {
   const { thumbnailUrl, title, url } = albumData;
-  const [open, setOpen] = useState(false);
-
-  const setToggle = () => {
-    setOpen(!open);
-  };
 
   return (
     <>
@@ -20,13 +13,14 @@ const Photo = ({ albumData }) => {
             top
             width="100%"
             className="thumbnail-image"
-            onClick={() => setToggle()}
+            onClick={() => {
+              showPreview({ title, url });
+            }}
           />
           <CardBody>
             <CardTitle tag="h5">{title}</CardTitle>
           </CardBody>
         </Card>
-        {open && <ImagePreview url={url} open={open} setToggle={setToggle} />}
       </Col>
     </>
   );

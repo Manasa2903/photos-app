@@ -1,17 +1,16 @@
 import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from "reactstrap";
 
-const ImagePreview = ({ url, open, setToggle }) => {
+const ImagePreview = ({ title, url, hidePreview }) => {
   return (
     <div>
-      {console.log(open)}
       {console.log(url)}
-      <Modal backdrop={false} centered fullscreen size="lg" isOpen={open}>
-        <ModalHeader toggle={setToggle}>Modal title</ModalHeader>
+      <Modal size="lg" isOpen>
+        <ModalHeader toggle={hidePreview}>{title}</ModalHeader>
         <ModalBody>
-          <img src={url} alt="imagePreview" />
+          <img src={url} alt={title} />
         </ModalBody>
         <ModalFooter>
-          <Button onClick={setToggle}>Cancel</Button>
+          <Button onClick={hidePreview}>Close</Button>
         </ModalFooter>
       </Modal>
     </div>
