@@ -10,6 +10,7 @@ import {
   Spinner,
 } from "reactstrap";
 import ImagePreview from "./ImagePreview";
+import AddNewPhoto from "./AddNewPhoto";
 
 const Photos = () => {
   const [page, setPage] = useState(1);
@@ -17,6 +18,7 @@ const Photos = () => {
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [imagePreviewDetails, setImagePreviewDetails] = useState(null);
+  const [isAddPhotoClicked, setIsAddPhotoClicked] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -51,7 +53,20 @@ const Photos = () => {
           hidePreview={hideImagePreview}
         />
       )}
+
       <h1 className="heading">Photos App</h1>
+      <button
+        className="btn btn-primary"
+        onClick={() => {
+          setIsAddPhotoClicked(true);
+        }}
+      >
+        New Photo
+      </button>
+
+      {isAddPhotoClicked && (
+        <AddNewPhoto open={isAddPhotoClicked} setOpen={setIsAddPhotoClicked} />
+      )}
       <div className="pagination">
         <Pagination>
           <PaginationItem>
