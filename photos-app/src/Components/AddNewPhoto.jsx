@@ -1,22 +1,21 @@
 import { Modal, ModalHeader, ModalBody } from "reactstrap";
 import { useState } from "react";
 
-const AddNewPhoto = ({ open, setOpen }) => {
+const AddNewPhoto = ({ open, setOpen, albumId }) => {
   const [formData, setFormData] = useState({});
-
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(formData),
-  };
 
   const formSubmit = async (event) => {
     event.preventDefault();
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    };
     try {
       const response = await fetch(
-        "https://jsonplaceholder.typicode.com/albums/1/photos",
+        `https://jsonplaceholder.typicode.com/albums/${albumId}/photos`,
         options
       );
       const jsonData = await response.json();
@@ -28,8 +27,7 @@ const AddNewPhoto = ({ open, setOpen }) => {
   };
 
   const handleFormInputs = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
+    const { name, value } = event.target;
     setFormData((prevValues) => ({ ...prevValues, [name]: value }));
   };
 
@@ -72,7 +70,7 @@ const AddNewPhoto = ({ open, setOpen }) => {
             onChange={handleFormInputs}
           />
 
-          <label htmlFor="url" className="form-label">
+          <label htmlFor="thumbnailUrl" className="form-label">
             ThumbnailUrl
           </label>
           <input

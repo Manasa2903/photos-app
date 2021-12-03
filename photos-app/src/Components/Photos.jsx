@@ -3,26 +3,27 @@ import Photo from "./Photo";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
   Container,
-  Pagination,
-  PaginationItem,
-  PaginationLink,
+  // Pagination,
+  // PaginationItem,
+  // PaginationLink,
   Row,
   Spinner,
 } from "reactstrap";
 import ImagePreview from "./ImagePreview";
 import AddNewPhoto from "./AddNewPhoto";
+import { useParams } from "react-router";
 
 const Photos = () => {
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const [albumsData, setAlbumsData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(false);
   const [imagePreviewDetails, setImagePreviewDetails] = useState(null);
   const [isAddPhotoClicked, setIsAddPhotoClicked] = useState(false);
-
+  const { id } = useParams();
   useEffect(() => {
     setLoading(true);
-    fetch(`https://jsonplaceholder.typicode.com/albums/${page}/photos`)
+    fetch(`https://jsonplaceholder.typicode.com/albums/${id}/photos`)
       .then((response) => response.json())
       .then((jsonData) => {
         setLoading(false);
@@ -32,7 +33,7 @@ const Photos = () => {
         console.log(e.message);
         setLoading(false);
       });
-  }, [page]);
+  }, [id]);
 
   const showImagePreview = (previewDetails) => {
     setOpen(true);
@@ -54,20 +55,26 @@ const Photos = () => {
         />
       )}
 
-      <h1 className="heading">Photos App</h1>
-      <button
-        className="btn btn-primary"
-        onClick={() => {
-          setIsAddPhotoClicked(true);
-        }}
-      >
-        New Photo
-      </button>
+      <h1 className="heading">Album {id}</h1>
+      <div className="new-photo">
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            setIsAddPhotoClicked(true);
+          }}
+        >
+          New Photo
+        </button>
+      </div>
 
       {isAddPhotoClicked && (
-        <AddNewPhoto open={isAddPhotoClicked} setOpen={setIsAddPhotoClicked} />
+        <AddNewPhoto
+          open={isAddPhotoClicked}
+          setOpen={setIsAddPhotoClicked}
+          albumId={id}
+        />
       )}
-      <div className="pagination">
+      {/* <div className="pagination">
         <Pagination>
           <PaginationItem>
             <PaginationLink
@@ -129,7 +136,7 @@ const Photos = () => {
             />
           </PaginationItem>
         </Pagination>
-      </div>
+      </div> */}
 
       <Container>
         <Row>
